@@ -14,6 +14,4 @@ class Connection:
 
             return db
         except mysql.connector.Error as err:
-            print(f"Error al conectarse a la base de datos {err}")
-    
-    connection_db()
+            print(f"Error al conectarse a la base de datos: {err}")
