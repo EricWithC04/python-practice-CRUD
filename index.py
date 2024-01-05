@@ -33,6 +33,21 @@ class ClientForm:
             tk.Button(groupBox, text='Delete', width=10).grid(row=4, column=1)
             tk.Button(groupBox, text='Update', width=10).grid(row=4, column=2)
 
+            groupBox = tk.LabelFrame(root, text="Client List", padx=10, pady=10)
+            groupBox.grid(row=0, column=1, padx=10, pady=10)
+
+            tree = ttk.Treeview(groupBox, columns=('Name', 'Surname', 'Age', 'Genre'), show='headings', height=10)
+            tree.column('Name', anchor=tk.CENTER)
+            tree.heading('Name', text="Name")
+            tree.column('Surname', anchor=tk.CENTER)
+            tree.heading('Surname', text="Surname")
+            tree.column('Age', anchor=tk.CENTER)
+            tree.heading('Age', text="Age")
+            tree.column('Genre', anchor=tk.CENTER)
+            tree.heading('Genre', text="Genre")
+
+            tree.pack()
+
             root.mainloop()
         except ValueError:
             messagebox.showerror("Error", "Please Enter Correct Details")
