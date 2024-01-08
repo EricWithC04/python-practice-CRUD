@@ -104,6 +104,9 @@ class ClientForm:
             tree.column('Genre', anchor=tk.CENTER)
             tree.heading('Genre', text="Genre")
 
+            for register in client.showClients():
+                tree.insert('', tk.END, values=(register[1], register[2], register[3], register[4]))
+
             tree.pack()
 
             root.mainloop()
