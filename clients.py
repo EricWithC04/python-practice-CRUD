@@ -2,6 +2,21 @@ from connection import Connection, mysql
 
 class client:
 
+    def showClients():
+        try:
+            connect=Connection.connection_db()
+            cursor = connect.cursor()
+
+            cursor.execute("SELECT * FROM clients")
+            all_clients = cursor.fetchall()
+
+            connect.commit()
+            connect.close()
+
+            return all_clients
+        except mysql.connector.Error as err:
+            print(f"Error al mostrar los datos: {err}")
+
     def addClient(name, surname, age, genre):
         try:
             connect=Connection.connection_db()
