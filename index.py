@@ -21,11 +21,29 @@ def save_registers():
         client.addClient(name, surname, age, genre)
         messagebox.showinfo("Información", "Datos cargados con exito!")
 
-        nameInput.delete()
-        surnameInput.delete()
-        ageInput.delete()
+        nameInput.delete(0, tk.END)
+        surnameInput.delete(0, tk.END)
+        ageInput.delete(0, tk.END)
+        combo.delete(0, tk.END)
+
+        upload_registers()
 
     except Exception as e: print(f"Error: {e}")
+
+def upload_registers():
+    try:
+        
+        global tree
+
+        tree.delete(*tree.get_children())
+
+        data = client.showClients()
+
+        for register in data:
+            tree.insert('', tk.END, values=(register[1], register[2], register[3], register[4]))
+
+    except Exception as e:
+        print(f"Error al actualizar la lista de usuarios: {e}")
 
 class ClientForm:
 
@@ -104,8 +122,7 @@ class ClientForm:
             tree.column('Genre', anchor=tk.CENTER)
             tree.heading('Genre', text="Genre")
 
-            for register in client.showClients():
-                tree.insert('', tk.END, values=(register[1], register[2], register[3], register[4]))
+            upload_registers()
 
             tree.pack()
 
