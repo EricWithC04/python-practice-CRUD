@@ -26,11 +26,11 @@ def save_registers():
         ageInput.delete(0, tk.END)
         combo.delete(0, tk.END)
 
-        upload_registers()
+        update_registers()
 
     except Exception as e: print(f"Error: {e}")
 
-def upload_registers():
+def update_registers():
     try:
         
         global tree
@@ -122,7 +122,7 @@ class ClientForm:
             tree.column('Genre', anchor=tk.CENTER)
             tree.heading('Genre', text="Genre")
 
-            upload_registers()
+            update_registers()
 
             tree.pack()
 
