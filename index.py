@@ -47,6 +47,32 @@ def update_register_data(event):
     except Exception as e:
         print(f"Error al actualizar los datos: {e}")
 
+def save_updated_register():
+
+    global nameInput, surnameInput, combo, ageInput, groupBox
+
+    try:
+        if nameInput is None or surnameInput is None or combo is None or ageInput is None or genreInput is None:
+            print("Todos los campos deben estar completados")
+            return
+        
+        name = nameInput.get()
+        surname = surnameInput.get()
+        age = ageInput.get()
+        genre = combo.get()
+
+        client.updateClient(name, surname, age, genre)
+        messagebox.showinfo("Información", "Datos actualizados con exito!")
+
+        nameInput.delete(0, tk.END)
+        surnameInput.delete(0, tk.END)
+        ageInput.delete(0, tk.END)
+        combo.delete(0, tk.END)
+
+        update_registers()
+
+    except Exception as e: print(f"Error: {e}")
+
 def update_registers():
     try:
         
@@ -126,7 +152,7 @@ class ClientForm:
 
             tk.Button(groupBox, text='Submit', width=10, command=save_registers).grid(row=4, column=0)
             tk.Button(groupBox, text='Delete', width=10).grid(row=4, column=1)
-            tk.Button(groupBox, text='Update', width=10).grid(row=4, column=2)
+            tk.Button(groupBox, text='Update', width=10, command=save_updated_register).grid(row=4, column=2)
 
             groupBox = tk.LabelFrame(root, text="Client List", padx=10, pady=10)
             groupBox.grid(row=0, column=1, padx=10, pady=10)
