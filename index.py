@@ -30,6 +30,23 @@ def save_registers():
 
     except Exception as e: print(f"Error: {e}")
 
+def update_register_data(event):
+    try:
+        selected_item = tree.focus()
+
+        if selected_item:
+            values = tree.item(selected_item)["values"]
+
+            nameInput.delete(0, tk.END)
+            nameInput.insert(0, values[0])
+            surnameInput.delete(0, tk.END)
+            surnameInput.insert(0, values[1])
+            ageInput.delete(0, tk.END)
+            ageInput.insert(0, values[2])
+            combo.set(values[3])
+    except Exception as e:
+        print(f"Error al actualizar los datos: {e}")
+
 def update_registers():
     try:
         
@@ -41,6 +58,8 @@ def update_registers():
 
         for register in data:
             tree.insert('', tk.END, values=(register[1], register[2], register[3], register[4]))
+        
+        tree.bind("<<TreeviewSelect>>", update_register_data)
 
     except Exception as e:
         print(f"Error al actualizar la lista de usuarios: {e}")
