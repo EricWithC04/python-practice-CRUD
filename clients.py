@@ -48,3 +48,19 @@ class client:
             connect.close()
         except mysql.connector.Error as err:
             print(f"Error al ingresar los datos a la base de datos: {err}")
+
+    def deleteClient(name, surname):
+        try:
+            connect=Connection.connection_db()
+            cursor = connect.cursor()
+
+            sql = "DELETE from clients WHERE clients.name = %s AND clients.surname = %s"
+            values=(name, surname)
+
+            cursor.execute(sql, values)
+
+            connect.commit()
+            print("Client deleted successfully")
+            connect.close()
+        except mysql.connector.Error as err:
+            print(f"Error al eliminar los datos de la base de datos: {err}")
